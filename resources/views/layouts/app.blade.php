@@ -10,8 +10,10 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script> -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://kit.fontawesome.com/a7ba4f84a9.js" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/bootstrap-multiselect.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -20,6 +22,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/forum.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap-multiselect') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -104,5 +107,12 @@
             @endif
         </main>
     </div>
+    <script>
+        'use strict';
+
+        $(function(){
+        $('#multiple').multiselect();
+        });
+    </script>
 </body>
 </html>
