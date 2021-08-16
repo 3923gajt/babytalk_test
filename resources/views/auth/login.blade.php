@@ -2,7 +2,13 @@
 
 @section('content')
 <div class="container">
-    <img src="../../../public/images/topbaby.jpg" alt="image">
+<div class="jumbotron text-gray  d-flex align-items-center"
+ style="background:url({{asset('storage/images/test3.jpeg')}});background-size:cover;height:320px;">
+    <div class="col-12 col-md-8 col-lg-6 mx-auto">
+        <h1 class="mb-3 wakaba">babytalk</h1>
+        <p>ご利用には、会員登録が必要となります。</br>みんなで育児のことお話ししましょう！</p> 
+    </div>
+</div>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
