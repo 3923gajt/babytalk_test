@@ -20,9 +20,15 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
+    @if(app('env') == 'production')
+    <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('css/forum.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('css/bootstrap-multiselect') }}" rel="stylesheet">
+    @else
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/forum.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap-multiselect') }}" rel="stylesheet">
+    @endif
 </head>
 <body>
     <div id="app">
