@@ -2,10 +2,19 @@
 
 @section('content')
 <div class="container">
+<div class="jumbotron text-gray  d-flex align-items-center"
+ style="background:url({{asset('storage/images/top2.jpg')}});background-size:cover;height:320px;">
+    <div class="col-12 col-md-8 col-lg-6 mx-auto">
+        <h1 class="mb-3 wakaba">babytalk</h1>
+        <p>ご利用には、会員登録が必要となります。</br>みんなで育児のことお話ししましょう！</p> 
+    </div>
+</div>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Register') }}</div>
+
+                
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">

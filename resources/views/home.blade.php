@@ -29,7 +29,7 @@
 
     <label for="title">いつの話：</label>
         <select name="year[]" id="multiple" class="multiple" multiple="multiple">
-            <option>年を選択</option>
+            <option selected>年を選択</option>
             <option value="2025">2025</option>
             <option value="2024">2024</option>
             <option value="2023">2023</option>
@@ -39,7 +39,7 @@
         </select>
 
         <select name="month[]"　size="4" multiple>
-            <option>月を選択</option>
+            <option selected>月を選択</option>
             <option value="01">1月</option>
             <option value="02">2月</option>
             <option value="03">3月</option>
