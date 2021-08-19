@@ -73,7 +73,7 @@
                 <div class="card-body">
                     <!-- 地域など表示したい -->
                     <a href="{{route('post.show', $post)}}">
-                    {{ Str::limit ("起床時間:".$post->getup_time."  "."朝食内容:".$post->breakfast."  "."午前の過ごし方:".$post->morning_time."  "."昼食内容:".$post->lunch."  "."午後の過ごし方:".$post->after_time."夕食内容:".$post->dinner."就寝時間:".$post->sleep_time.$post->body, 100, ' ...詳細はこちら') }}
+                    {{ Str::limit ("起床時間:".substr((string)$post->getup_time,0,5)."  "."朝食内容:".$post->breakfast."  "."午前の過ごし方:".$post->morning_time."  "."昼食内容:".$post->lunch."  "."午後の過ごし方:".$post->after_time."夕食内容:".$post->dinner."就寝時間:".substr((string)$post->sleep_time,0,5).$post->body, 100, ' ...詳細はこちら') }}
                     </a>
                     @if($post->image)
                     <img src="{{asset('storage/images/'.$post->image)}}" class="img-fluid mx-auto d-block" style="width:200px;">

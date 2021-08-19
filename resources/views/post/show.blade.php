@@ -32,13 +32,13 @@
     </div>
     <div class="card-body">
         <p class="card-text">
-            <h5>{{"起床時間：".$post->getup_time}}</h5>
+            <h5>{{"起床時間：".substr((string)$post->getup_time,0,5)}}</h5>
             <h5>{{"朝食内容：".$post->breakfast}}</h5>
             <h5>{{"午前の過ごし方：".$post->morning_time}}</h5>
             <h5>{{"昼食内容：".$post->lunch}}</h5>
             <h5>{{"午後の過ごし方：".$post->after_time}}</h5>
             <h5>{{"夕食内容：".$post->dinner}}</h5>
-            <h5>{{"就寝時間：".$post->sleep_time}}</h5>
+            <h5>{{"就寝時間：".substr((string)$post->sleep_time,0,5)}}</h5>
             </br>
             <h5>{{"一言：".$post->body}}</h5>
         </p>
