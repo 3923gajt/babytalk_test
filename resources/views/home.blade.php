@@ -11,7 +11,7 @@
 <form method="get" action="" enctype="multipart/form-data">
     <label for="title">住んでいる地域：</label>
         <select name="pref[]" class="form-select form-select-sm" aria-label=".form-select-sm example"　size="4" multiple>
-            <option selected>都道府県を選ぶ</option>
+            <option value="" selected>全て選択</option>
             <!-- ＄prefをforeachで回す -->
             @foreach($prefs as $pref)
             <option value="{{$pref['id']}}">{{$pref['name']}}</option>
@@ -20,7 +20,7 @@
 
     <label for="title">お子様の年齢：</label>
         <select name="babyage[]" class="form-select form-select-sm" aria-label=".form-select-sm example" size="4" multiple>
-            <option selected>年齢を選ぶ</option>
+            <option value="" selected>全て選択</option>
             @foreach($ages as $age)
             <!-- 表示は０際０ヶ月だけどDB(postsテーブル)には$age['id']でid（文字を入れたくないから）をいれる -->
             <option value="{{$age['id']}}">{{$age['age']}}</option>
@@ -29,7 +29,7 @@
 
     <label for="title">いつの話：</label>
         <select name="year[]" id="multiple" class="multiple" multiple="multiple">
-            <option selected>年を選択</option>
+            <option value="" selected>全て選択</option>
             <option value="2025">2025</option>
             <option value="2024">2024</option>
             <option value="2023">2023</option>
@@ -39,7 +39,7 @@
         </select>
 
         <select name="month[]"　size="4" multiple>
-            <option selected>月を選択</option>
+            <option value="" selected>全て選択</option>
             <option value="01">1月</option>
             <option value="02">2月</option>
             <option value="03">3月</option>

@@ -31,83 +31,83 @@ class HomeController extends Controller
         if(isset($_GET['pref'],$_GET['babyage'],$_GET['year'],$_GET['month'])){
             //  dd($_GET['pref']);
             //都道府県・子供の年齢・年を選択・月を選択が全部選択されていない場合
-            if($_GET['pref'][0] === "都道府県を選ぶ" && $_GET['babyage'][0] === "年齢を選ぶ" && $_GET['year'][0] === "年を選択" && $_GET['month'][0] === "月を選択"){
+            if(empty($_GET['pref'][0]) && empty($_GET['babyage'][0]) && empty($_GET['year'][0]) && empty($_GET['month'][0])){
                 $posts=Post::orderBy('created_at','desc')->get();
             }
 
             //都道府県（都道府県を選ぶは含まない）・子供の年齢（子供の年齢を選ぶは含まない）・年を選択・月を選択が全部選択されている
-            if($_GET['pref'][0] !== "都道府県を選ぶ" && $_GET['babyage'][0] !== "年齢を選ぶ" && $_GET['year'][0] !== "年を選択" && $_GET['month'][0] !== "月を選択"){
+            if(!empty($_GET['pref'][0]) && !empty($_GET['babyage'][0]) && !empty($_GET['year'][0]) && !empty($_GET['month'][0])){
                 $posts=Post::whereIn('prefecture_id',$_GET['pref'])->whereIn('babyage_scope_id',$_GET['babyage'])->whereIn('year',$_GET['year'])->whereIn('month',$_GET['month'])->get();
             }
 
             //都道府県（都道府県を選ぶは含まない）のみ選択されている
-            if($_GET['pref'][0] !== "都道府県を選ぶ" && $_GET['babyage'][0] === "年齢を選ぶ" && $_GET['year'][0] === "年を選択" && $_GET['month'][0] === "月を選択"){
+            if(!empty($_GET['pref'][0]) && empty($_GET['babyage'][0]) && empty($_GET['year'][0]) && empty($_GET['month'][0])){
                 // dd($_GET['pref']);
                 $posts=Post::whereIn('prefecture_id',$_GET['pref'])->get();
             }
 
             //子供の年齢（子供の年齢を選ぶは含まない）のみ選択されている
-            if($_GET['pref'][0] === "都道府県を選ぶ" && $_GET['babyage'][0] !== "年齢を選ぶ" && $_GET['year'][0] === "年を選択" && $_GET['month'][0] === "月を選択"){
+            if(empty($_GET['pref'][0]) && !empty($_GET['babyage'][0]) && empty($_GET['year'][0]) && empty($_GET['month'][0])){
                 $posts=Post::whereIn('babyage_scope_id',$_GET['babyage'])->get();
             }
 
             //年を選択のみ選択されている
-              if($_GET['pref'][0] === "都道府県を選ぶ" && $_GET['babyage'][0] === "年齢を選ぶ" && $_GET['year'][0] !== "年を選択" && $_GET['month'][0] === "月を選択"){
+              if(empty($_GET['pref'][0]) && empty($_GET['babyage'][0]) && !empty($_GET['year'][0]) && empty($_GET['month'][0])){
                 $posts=Post::whereIn('year',$_GET['year'])->get();
             }
 
             //月を選択のみ選択されている
-              if($_GET['pref'][0] === "都道府県を選ぶ" && $_GET['babyage'][0] === "年齢を選ぶ" && $_GET['year'][0] === "年を選択" && $_GET['month'][0] !== "月を選択"){
+              if(empty($_GET['pref'][0]) && empty($_GET['babyage'][0]) && empty($_GET['year'][0]) && !empty($_GET['month'][0])){
                 $posts=Post::whereIn('month',$_GET['month'])->get();
             }
 
             //都道府県以外選択されている
-            if($_GET['pref'][0] === "都道府県を選ぶ" && $_GET['babyage'][0] !== "年齢を選ぶ" && $_GET['year'][0] !== "年を選択" && $_GET['month'][0] !== "月を選択"){
+            if(empty($_GET['pref'][0]) && !empty($_GET['babyage'][0]) && !empty($_GET['year'][0]) && !empty($_GET['month'][0])){
                 $posts=Post::whereIn('babyage_scope_id',$_GET['babyage'])->whereIn('year',$_GET['year'])->whereIn('month',$_GET['month'])->get();
             }
 
             //子供の年齢以外選択されている
-            if($_GET['pref'][0] !== "都道府県を選ぶ" && $_GET['babyage'][0] === "年齢を選ぶ" && $_GET['year'][0] !== "年を選択" && $_GET['month'][0] !== "月を選択"){
+            if(!empty($_GET['pref'][0]) && empty($_GET['babyage'][0]) && !empty($_GET['year'][0]) && !empty($_GET['month'][0])){
                 $posts=Post::whereIn('prefecture_id',$_GET['pref'])->whereIn('year',$_GET['year'])->whereIn('month',$_GET['month'])->get();
             }
 
             //年の選択以外選択されている
-            if($_GET['pref'][0] !== "都道府県を選ぶ" && $_GET['babyage'][0] !== "年齢を選ぶ" && $_GET['year'][0] === "年を選択" && $_GET['month'][0] !== "月を選択"){
+            if(!empty($_GET['pref'][0]) && !empty($_GET['babyage'][0]) && empty($_GET['year'][0]) && !empty($_GET['month'][0])){
                 $posts=Post::whereIn('prefecture_id',$_GET['pref'])->whereIn('babyage_scope_id',$_GET['babyage'])->whereIn('month',$_GET['month'])->get();
             }
 
              //月の選択以外選択されている
-             if($_GET['pref'][0] !== "都道府県を選ぶ" && $_GET['babyage'][0] !== "年齢を選ぶ" && $_GET['year'][0] !== "年を選択" && $_GET['month'][0] === "月を選択"){
+             if(!empty($_GET['pref'][0]) && !empty($_GET['babyage'][0]) && !empty($_GET['year'][0]) && empty($_GET['month'][0])){
                 $posts=Post::whereIn('prefecture_id',$_GET['pref'])->whereIn('babyage_scope_id',$_GET['babyage'])->where('year',$_GET['year'])->get();
             }
 
              //都道府県・子供の年齢のみ選択されている
-             if($_GET['pref'][0] !== "都道府県を選ぶ" && $_GET['babyage'][0] !== "年齢を選ぶ" && $_GET['year'][0] === "年を選択" && $_GET['month'][0] === "月を選択"){
+             if(!empty($_GET['pref'][0]) && !empty($_GET['babyage'][0]) && empty($_GET['year'][0]) && empty($_GET['month'][0])){
                 $posts=Post::whereIn('prefecture_id',$_GET['pref'])->whereIn('babyage_scope_id',$_GET['babyage'])->get();
             }
 
               //都道府県・年の選択のみ選択されている
-              if($_GET['pref'][0] !== "都道府県を選ぶ" && $_GET['babyage'][0] === "年齢を選ぶ" && $_GET['year'][0] !== "年を選択" && $_GET['month'][0] === "月を選択"){
+              if(!empty($_GET['pref'][0]) && empty($_GET['babyage'][0]) && !empty($_GET['year'][0]) && empty($_GET['month'][0])){
                 $posts=Post::whereIn('prefecture_id',$_GET['pref'])->whereIn('year',$_GET['year'])->get();
             }
 
               //都道府県・月の選択のみ選択されている
-              if($_GET['pref'][0] !== "都道府県を選ぶ" && $_GET['babyage'][0] === "年齢を選ぶ" && $_GET['year'][0] === "年を選択" && $_GET['month'][0] !== "月を選択"){
+              if(!empty($_GET['pref'][0]) && empty($_GET['babyage'][0]) && empty($_GET['year'][0]) && !empty($_GET['month'][0])){
                 $posts=Post::whereIn('prefecture_id',$_GET['pref'])->whereIn('month',$_GET['month'])->get();
             }
 
             //年・月を選択のみ選択されている
-            if($_GET['pref'][0] === "都道府県を選ぶ" && $_GET['babyage'][0] === "年齢を選ぶ" && $_GET['year'][0] !== "年を選択" && $_GET['month'][0] !== "月を選択"){
+            if(empty($_GET['pref'][0]) && empty($_GET['babyage'][0]) && !empty($_GET['year'][0]) && !empty($_GET['month'][0])){
                 $posts=Post::whereIn('year',$_GET['year'])->whereIn('month',$_GET['month'])->get();
             }
 
              //子供の年齢・年を選択のみ選択されている
-             if($_GET['pref'][0] === "都道府県を選ぶ" && $_GET['babyage'][0] !== "年齢を選ぶ" && $_GET['year'][0] !== "年を選択" && $_GET['month'][0] === "月を選択"){
+             if(empty($_GET['pref'][0]) && !empty($_GET['babyage'][0]) && !empty($_GET['year'][0]) && empty($_GET['month'][0])){
                 $posts=Post::whereIn('babyage_scope_id',$_GET['babyage'])->whereIn('year',$_GET['year'])->get();
             }
 
              //子供の年齢・月を選択のみ選択されている
-             if($_GET['pref'][0] === "都道府県を選ぶ" && $_GET['babyage'][0] !== "年齢を選ぶ" && $_GET['year'][0] === "年を選択" && $_GET['month'][0] !== "月を選択"){
+             if(empty($_GET['pref'][0]) && !empty($_GET['babyage'][0]) && empty($_GET['year'][0]) && !empty($_GET['month'][0])){
                 $posts=Post::whereIn('babyage_scope_id',$_GET['babyage'])->whereIn('month',$_GET['month'])->get();
             }
 
