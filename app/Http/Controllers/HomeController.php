@@ -29,7 +29,7 @@ class HomeController extends Controller
 
           
         if(isset($_GET['pref'],$_GET['babyage'],$_GET['year'],$_GET['month'])){
-            //  dd($_GET['pref']);
+            //   dd($_GET['pref']);
             //都道府県・子供の年齢・年を選択・月を選択が全部選択されていない場合
             if(empty($_GET['pref'][0]) && empty($_GET['babyage'][0]) && empty($_GET['year'][0]) && empty($_GET['month'][0])){
                 $posts=Post::orderBy('created_at','desc')->get();
@@ -127,10 +127,53 @@ class HomeController extends Controller
 
 
         $user=auth()->user();
-        $prefs=prefecture::all();
-        $ages=babyage_scope::all();
-        // dd($posts[0]->babyage_scope);
-        return view('home', compact('posts', 'user','prefs','ages'));
+        // $test=array_column(Post::groupBy('prefecture_id')->get('prefecture_id')->toArray(),'prefecture_id');   
+        //  $nihon = [['player' => 'honda','height' => 180],['player' => 'kagawa','height' => 170]];   
+        //  $temp = [];
+        //  foreach ($nihon as $value){
+        //   array_push($temp,$value['height']);
+        //  }
+        // dd(array_column($nihon,'player'));
+        
+        // $testtest = array(1,2);
+        
+        // dd(Post::groupBy('prefecture_id')->get('prefecture_id')->toArray());
+    //   dd($test);
+         $test = Post::groupBy('prefecture_id')->get('prefecture_id')->toArray();        
+         $temparray = [];
+       foreach ($test as $value){
+          array_push($temparray,$value['prefecture_id']);
+      }
+    //   array_column(Post::groupBy('prefecture_id')->get('prefecture_id')->toArray(),'prefecture_id')と$temparrayは同じ
+      
+         $prefs=prefecture::whereIn('id',$temparray)->get();
+
+        // $prefs = prefecture::all();
+        //  dd($prefs);
+        $babyid=Post::groupBy('babyage_scope_id')->get('babyage_scope_id')->toArray();
+        $temparray = [];
+        foreach ($babyid as $value){
+            array_push($temparray,$value['babyage_scope_id']);
+        }
+        $ages=babyage_scope::whereIn('id',$temparray)->get();
+        
+        $postedyear=Post::groupBy('year')->get('year')->toArray();
+        $temparray = [];
+        foreach ($postedyear as $value){
+            array_push($temparray,$value['year']);
+        }
+        $years=$temparray;
+
+        $postedmonth=Post::groupBy('month')->get('month')->toArray();
+        $temparray = [];
+        foreach ($postedmonth as $value){
+            array_push($temparray,$value['month']);
+        }
+        $months=$temparray;
+
+
+
+        return view('home', compact('posts', 'user','prefs','ages','years','months'));
         
     }
 

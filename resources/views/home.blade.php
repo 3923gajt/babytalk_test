@@ -30,28 +30,16 @@
     <label for="title">いつの話：</label>
         <select name="year[]" id="multiple" class="multiple" multiple="multiple">
             <option value="" selected>全て選択</option>
-            <option value="2025">2025</option>
-            <option value="2024">2024</option>
-            <option value="2023">2023</option>
-            <option value="2022">2022</option>
-            <option value="2021">2021</option>
-            <option value="2020">2020</option>
+            @foreach($years as $year)
+            <option value="{{$year}}">{{$year}}</option>
+            @endforeach
         </select>
 
         <select name="month[]"　size="4" multiple>
-            <option value="" selected>全て選択</option>
-            <option value="01">1月</option>
-            <option value="02">2月</option>
-            <option value="03">3月</option>
-            <option value="04">4月</option>
-            <option value="05">5月</option>
-            <option value="06">6月</option>
-            <option value="07">7月</option>
-            <option value="08">8月</option>
-            <option value="09">9月</option>
-            <option value="10">10月</option>
-            <option value="11">11月</option>
-            <option value="12">12月</option>
+        <option value="" selected>全て選択</option>
+            @foreach($months as $month)
+            <option value="{{$month}}">{{(int)$month}}月</option>
+            @endforeach
         </select>
 
     <button type="submit" class="btn btn-success">検索</button>
