@@ -3,8 +3,11 @@
 
 <div class="card mb-4">
     <div class="card-header">
-    <img src="{{asset('storage/avatar/'.($post->user->avatar??'user_default.jpg'))}}"
-                        class="rounded-circle" style="width:40px;height:40px;">
+    @if($post->user->avatar === "user_default.jpg")
+                            <img src="{{asset('/img/user_default.jpg')}}"class="rounded-circle" style="width:40px;height:40px;">
+                        @else                            
+                             <img src="{{$post->user->avatar}}"class="rounded-circle" style="width:40px;height:40px;">
+                        @endif
         <div class="text-muted small mr-3"> 
             {{$post->user->name??'削除されたユーザ'}}
             <div class="text-muted small"> 

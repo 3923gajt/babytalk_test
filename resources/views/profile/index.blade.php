@@ -22,8 +22,12 @@
             <td>{{$user->email}}</td>
             <!-- {{-- アバター表示 --}} -->
         <td>
-            <img src="{{asset('storage/avatar/'.($user->avatar??'user_default.jpg'))}}"
-            class="rounded-circle" style="width:40px;height:40px;">
+        @if($user->avatar === "user_default.jpg")
+            <img src="{{asset('/img/user_default.jpg')}}"class="rounded-circle" style="width:40px;height:40px;">
+        @else                            
+            <img src="{{$user->avatar}}"class="rounded-circle" style="width:40px;height:40px;">
+        @endif
+            <!-- class="rounded-circle" style="width:40px;height:40px;"> -->
         </td>
         <!-- {{-- 編集ボタン --}} -->
         <td>

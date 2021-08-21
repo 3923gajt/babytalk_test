@@ -25,8 +25,11 @@
             <div class="card mb-4">
                 <div class="card-header">
                     <div class="media flex-wrap w-100 align-items-center">
-                    <img src="{{asset('storage/avatar/'.($post->user->avatar??'user_default.jpg'))}}"
-                        class="rounded-circle" style="width:40px;height:40px;">
+                    @if($post->user->avatar === "user_default.jpg")
+                            <img src="{{asset('/img/user_default.jpg')}}"class="rounded-circle" style="width:40px;height:40px;">
+                        @else                            
+                             <img src="{{$post->user->avatar}}"class="rounded-circle" style="width:40px;height:40px;">
+                        @endif
                         <div class="media-body ml-3"><a href="{{route('post.show', $post)}}">{{$post->title}}</a> 
                             <div class="text-muted small"> 
                                 {{$post->user->name??'削除されたユーザ'}}
