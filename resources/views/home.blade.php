@@ -53,8 +53,11 @@
             <div class="card mb-4">
                 <div class="card-header">
                     <div class="media flex-wrap w-100 align-items-center">
-                    <img src="{{asset('storage/avatar/'.($post->user->avatar??'user_default.jpg'))}}"
-                        class="rounded-circle" style="width:40px;height:40px;">
+                        @if($post->user->avatar === "user_default.jpg")
+                            <img src="{{asset('/img/user_default.jpg')}}"class="rounded-circle" style="width:40px;height:40px;">
+                        @else                            
+                             <img src="{{$post->user->avatar}}"class="rounded-circle" style="width:40px;height:40px;">
+                        @endif     
                         <div class="media-body ml-3">
                        {{$post->user->name??'削除されたユーザ'}}
                             <div class="text-muted small"> 
@@ -76,7 +79,8 @@
                     {{ Str::limit ("起床時間:".substr((string)$post->getup_time,0,5)."  "."朝食内容:".$post->breakfast."  "."午前の過ごし方:".$post->morning_time."  "."昼食内容:".$post->lunch."  "."午後の過ごし方:".$post->after_time."夕食内容:".$post->dinner."就寝時間:".substr((string)$post->sleep_time,0,5).$post->body, 100, ' ...詳細はこちら') }}
                     </a>
                     @if($post->image)
-                    <img src="{{asset('storage/images/'.$post->image)}}" class="img-fluid mx-auto d-block" style="width:200px;">
+                    <!-- imageカラムにアマゾンのリンクが入っていたら、リンクを参照して表示する -->
+                    <img src="{{$post->image}}" class="img-fluid mx-auto d-block" style="width:200px;">
                     @endif
                 </div>
                 <div class="card-footer d-flex flex-wrap justify-content-between align-items-center px-0 pt-0 pb-3">

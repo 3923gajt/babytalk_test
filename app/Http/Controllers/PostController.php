@@ -6,6 +6,7 @@ use App\Models\babyage_scope;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\prefecture;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -81,12 +82,14 @@ class PostController extends Controller
         $post->month=substr($request->yearmonth, 5, 2);
     
         
-
         if(request('image')){
-            $original=request()->file('image')->getClientOriginalName();
-            $name=date('Ymd_His').'.'.$original;
-            request()->file('image')->move('storage/images', $name);
-            $post->image=$name;
+            $path = Storage::disk('s3')->putFile('/test', $request->file('image'), 'public');
+            // dd($path);
+            $post->image = Storage::disk('s3')->url($path);
+            // $original=request()->file('image')->getClientOriginalName();
+            // $name=date('Ymd_His').'.'.$original;
+            // request()->file('image')->move('storage/images', $name);
+            // $post->image=$name;
         }
 
         $post->save();
@@ -144,9 +147,12 @@ class PostController extends Controller
 
         
         if(request('image')){
-            $name=request()->file('image')->getClientOriginalName();
-            request()->file('image')->move('storage/images', $name);
-            $post->image=$name;
+            $path = Storage::disk('s3')->putFile('/test', $request->file('image'), 'public');
+            // dd($path);
+            $post->image = Storage::disk('s3')->url($path);
+            // $name=request()->file('image')->getClientOriginalName();
+            // request()->file('image')->move('storage/images', $name);
+            // $post->image=$name;
         }
         
         $post->body=$request->body;
