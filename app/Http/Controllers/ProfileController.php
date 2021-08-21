@@ -34,10 +34,11 @@ class ProfileController extends Controller
 
         // アバターの保存
         if(request('avatar')){
-            $name=request()->file( 'avatar')->getClientOriginalName();
-            $avatar=date('Ymd_His').'_'.$name;
-            request()->file( 'avatar')->storeAs('public/avatar', $avatar);
-            $inputs['avatar'] = $avatar;
+                $path = Storage::disk('s3')->putFile('/test', $request->file('avatar'), 'public');
+                
+                $inputs['avatar'] = Storage::disk('s3')->url($path);
+                
+            
         }
 
         // データベースに保存    

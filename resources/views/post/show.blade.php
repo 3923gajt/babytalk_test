@@ -3,11 +3,11 @@
 
 <div class="card mb-4">
     <div class="card-header">
-    @if($post->user->avatar === "user_default.jpg")
-                            <img src="{{asset('/img/user_default.jpg')}}"class="rounded-circle" style="width:40px;height:40px;">
-                        @else                            
-                             <img src="{{$post->user->avatar}}"class="rounded-circle" style="width:40px;height:40px;">
-                        @endif
+        @if($post->user->avatar === "user_default.jpg")
+            <img src="{{asset('/img/user_default.jpg')}}"class="rounded-circle" style="width:40px;height:40px;">
+        @else                            
+                <img src="{{$post->user->avatar}}"class="rounded-circle" style="width:40px;height:40px;">
+        @endif
         <div class="text-muted small mr-3"> 
             {{$post->user->name??'削除されたユーザ'}}
             <div class="text-muted small"> 
@@ -46,7 +46,7 @@
             <h5>{{"一言：".$post->body}}</h5>
         </p>
         @if ($post->image)
-        <img src="{{asset('storage/images/'.$post->image)}}" class="img-fluid mx-auto d-block" style="width:300px;">    
+        <img src="{{$post->image}}" class="img-fluid mx-auto d-block" style="width:300px;">    
         @endif
     </div>
     <div class="card-footer">
@@ -62,8 +62,11 @@
 <div class="card mb-4">
     
     <div class="card-header">
-    <img src="{{asset('storage/avatar/'.($comment->user->avatar??'user_default.jpg'))}}"
-        class="rounded-circle" style="width:40px;height:40px;">
+    @if($comment->user->avatar === "user_default.jpg")
+            <img src="{{asset('/img/user_default.jpg')}}"class="rounded-circle" style="width:40px;height:40px;">
+        @else                            
+                <img src="{{$comment->user->avatar}}"class="rounded-circle" style="width:40px;height:40px;">
+        @endif
         <div class="text-muted small mr-3"> 
             {{$comment->user->name??'削除されたユーザ'}} 
         </div>

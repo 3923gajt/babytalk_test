@@ -48,7 +48,7 @@
                         {{ Str::limit ("起床時間:".substr((string)$post->getup_time,0,5)."  "."朝食内容:".$post->breakfast."  "."午前の過ごし方:".$post->morning_time."  "."昼食内容:".$post->lunch."  "."午後の過ごし方:".$post->after_time."夕食内容:".$post->dinner."就寝時間:".substr((string)$post->sleep_time,0,5).$post->body, 100, ' ...詳細はこちら') }}
                 </a>
                     @if($post->image)
-                    <img src="{{asset('storage/images/'.$post->image)}}" class="img-fluid mx-auto d-block" style="width:200px;">
+                    <img src="{{$post->image}}" class="img-fluid mx-auto d-block" style="width:200px;">
                     @endif
                 </div>
                 <div class="card-footer d-flex flex-wrap justify-content-between align-items-center px-0 pt-0 pb-3">

@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 
 class RegisterController extends Controller
 {
@@ -71,15 +72,15 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password'])
           ];
-
+        
             //avatarの保存
-        if (request()->hasFile('avatar')) {  
-            $name = request()->file('avatar')->getClientOriginalName();
-            $avatar = date('Ymd_His').'_'.$name;
-            request()->file('avatar')->storeAs('public/avatar', $avatar);
-            //avatarファイル名をデータに追加
-            $attr['avatar'] = $avatar;
-        }
+
+            if(request('avatar')){
+                $path = Storage::disk('s3')->putFile('/test', request()->file('avatar'), 'public');
+                $attr['avatar']=Storage::disk('s3')->url($path);
+              
+            }
+        
     $user = User::create($attr);
     return $user;
     }
