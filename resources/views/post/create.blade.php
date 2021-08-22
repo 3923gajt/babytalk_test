@@ -43,7 +43,7 @@
                     @endforeach
                      </select>
                      <label for="title">いつの話</label>
-                     <input type="month" name="yearmonth" min="1990-04" max="2050-04">
+                     <input type="month" name="yearmonth" min="1990-04" max="{{date('Y')}}-{{date('m')}}">
                      
                      <!-- <input type="text" name="year" class="form-control" id="title" value="" placeholder="西暦"> -->
                     
