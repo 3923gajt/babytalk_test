@@ -58,7 +58,7 @@
                     @endforeach
                      </select>
                      <label for="title">いつの話</label>
-                     <input type="month" name="yearmonth" min="1990-04" max="2050-04" value="{{old('year',$post->year)."-".old('month',$post->month)}}">
+                     <input type="month" name="yearmonth" min="1990-04" max="{{date('Y')}}-{{date('m')}}" value="{{old('year',$post->year)."-".old('month',$post->month)}}">
                      
                      <!-- <input type="text" name="year" class="form-control" id="title" value="" placeholder="西暦"> -->
                     
