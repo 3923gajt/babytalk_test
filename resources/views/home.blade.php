@@ -53,10 +53,14 @@
             <div class="card mb-4">
                 <div class="card-header">
                     <div class="media flex-wrap w-100 align-items-center">
-                        @if($post->user->avatar === "user_default.jpg")
-                            <img src="{{asset('/img/user_default.jpg')}}"class="rounded-circle" style="width:40px;height:40px;">
-                        @else                            
-                             <img src="{{$post->user->avatar}}"class="rounded-circle" style="width:40px;height:40px;">
+                        @if($post->user)
+                            @if($post->user->avatar === "user_default.jpg")
+                                <img src="{{asset('/img/user_default.jpg')}}"class="rounded-circle" style="width:40px;height:40px;">
+                            @else                            
+                                <img src="{{$post->user->avatar}}"class="rounded-circle" style="width:40px;height:40px;">
+                            @endif 
+                        @else
+                        <img src="{{asset('/img/user_default.jpg')}}"class="rounded-circle" style="width:40px;height:40px;">
                         @endif     
                         <div class="media-body ml-3">
                        {{$post->user->name??'削除されたユーザ'}}
